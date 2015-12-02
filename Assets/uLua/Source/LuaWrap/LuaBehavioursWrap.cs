@@ -51,9 +51,6 @@ public class LuaBehavioursWrap
 			new LuaField("onOnTriggerExit2D", get_onOnTriggerExit2D, set_onOnTriggerExit2D),
 			new LuaField("onOnTriggerStay", get_onOnTriggerStay, set_onOnTriggerStay),
 			new LuaField("onOnTriggerStay2D", get_onOnTriggerStay2D, set_onOnTriggerStay2D),
-			new LuaField("onReset", get_onReset, set_onReset),
-			new LuaField("onOnAnimatorMove", get_onOnAnimatorMove, set_onOnAnimatorMove),
-			new LuaField("onOnAnimatorIK", get_onOnAnimatorIK, set_onOnAnimatorIK),
 		};
 
 		LuaScriptMgr.RegisterLib(L, "LuaBehaviours", typeof(LuaBehaviours), regs, fields, typeof(MonoBehaviour));
@@ -916,78 +913,6 @@ public class LuaBehavioursWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int get_onReset(IntPtr L)
-	{
-		object o = LuaScriptMgr.GetLuaObject(L, 1);
-		LuaBehaviours obj = (LuaBehaviours)o;
-
-		if (obj == null)
-		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
-
-			if (types == LuaTypes.LUA_TTABLE)
-			{
-				LuaDLL.luaL_error(L, "unknown member name onReset");
-			}
-			else
-			{
-				LuaDLL.luaL_error(L, "attempt to index onReset on a nil value");
-			}
-		}
-
-		LuaScriptMgr.Push(L, obj.onReset);
-		return 1;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int get_onOnAnimatorMove(IntPtr L)
-	{
-		object o = LuaScriptMgr.GetLuaObject(L, 1);
-		LuaBehaviours obj = (LuaBehaviours)o;
-
-		if (obj == null)
-		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
-
-			if (types == LuaTypes.LUA_TTABLE)
-			{
-				LuaDLL.luaL_error(L, "unknown member name onOnAnimatorMove");
-			}
-			else
-			{
-				LuaDLL.luaL_error(L, "attempt to index onOnAnimatorMove on a nil value");
-			}
-		}
-
-		LuaScriptMgr.Push(L, obj.onOnAnimatorMove);
-		return 1;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int get_onOnAnimatorIK(IntPtr L)
-	{
-		object o = LuaScriptMgr.GetLuaObject(L, 1);
-		LuaBehaviours obj = (LuaBehaviours)o;
-
-		if (obj == null)
-		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
-
-			if (types == LuaTypes.LUA_TTABLE)
-			{
-				LuaDLL.luaL_error(L, "unknown member name onOnAnimatorIK");
-			}
-			else
-			{
-				LuaDLL.luaL_error(L, "attempt to index onOnAnimatorIK on a nil value");
-			}
-		}
-
-		LuaScriptMgr.Push(L, obj.onOnAnimatorIK);
-		return 1;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_luaModule(IntPtr L)
 	{
 		object o = LuaScriptMgr.GetLuaObject(L, 1);
@@ -1075,14 +1000,17 @@ public class LuaBehavioursWrap
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
-			obj.onUpdate = (Action)LuaScriptMgr.GetNetObject(L, 3, typeof(Action));
+			obj.onUpdate = (LuaBehaviours.LuaMethord)LuaScriptMgr.GetNetObject(L, 3, typeof(LuaBehaviours.LuaMethord));
 		}
 		else
 		{
 			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onUpdate = () =>
+			obj.onUpdate = (param0) =>
 			{
-				func.Call();
+				int top = func.BeginPCall();
+				LuaScriptMgr.Push(L, param0);
+				func.PCall(top, 1);
+				func.EndPCall(top);
 			};
 		}
 		return 0;
@@ -1112,14 +1040,17 @@ public class LuaBehavioursWrap
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
-			obj.onLateUpdate = (Action)LuaScriptMgr.GetNetObject(L, 3, typeof(Action));
+			obj.onLateUpdate = (LuaBehaviours.LuaMethord)LuaScriptMgr.GetNetObject(L, 3, typeof(LuaBehaviours.LuaMethord));
 		}
 		else
 		{
 			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onLateUpdate = () =>
+			obj.onLateUpdate = (param0) =>
 			{
-				func.Call();
+				int top = func.BeginPCall();
+				LuaScriptMgr.Push(L, param0);
+				func.PCall(top, 1);
+				func.EndPCall(top);
 			};
 		}
 		return 0;
@@ -1149,14 +1080,17 @@ public class LuaBehavioursWrap
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
-			obj.onFixedUpdate = (Action)LuaScriptMgr.GetNetObject(L, 3, typeof(Action));
+			obj.onFixedUpdate = (LuaBehaviours.LuaMethord)LuaScriptMgr.GetNetObject(L, 3, typeof(LuaBehaviours.LuaMethord));
 		}
 		else
 		{
 			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onFixedUpdate = () =>
+			obj.onFixedUpdate = (param0) =>
 			{
-				func.Call();
+				int top = func.BeginPCall();
+				LuaScriptMgr.Push(L, param0);
+				func.PCall(top, 1);
+				func.EndPCall(top);
 			};
 		}
 		return 0;
@@ -1186,16 +1120,17 @@ public class LuaBehavioursWrap
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
-			obj.onOnApplicationFocus = (Action<bool>)LuaScriptMgr.GetNetObject(L, 3, typeof(Action<bool>));
+			obj.onOnApplicationFocus = (LuaBehaviours.LuaMethordBool)LuaScriptMgr.GetNetObject(L, 3, typeof(LuaBehaviours.LuaMethordBool));
 		}
 		else
 		{
 			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onOnApplicationFocus = (param0) =>
+			obj.onOnApplicationFocus = (param0, param1) =>
 			{
 				int top = func.BeginPCall();
 				LuaScriptMgr.Push(L, param0);
-				func.PCall(top, 1);
+				LuaScriptMgr.Push(L, param1);
+				func.PCall(top, 2);
 				func.EndPCall(top);
 			};
 		}
@@ -1226,16 +1161,17 @@ public class LuaBehavioursWrap
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
-			obj.onOnApplicationPause = (Action<bool>)LuaScriptMgr.GetNetObject(L, 3, typeof(Action<bool>));
+			obj.onOnApplicationPause = (LuaBehaviours.LuaMethordBool)LuaScriptMgr.GetNetObject(L, 3, typeof(LuaBehaviours.LuaMethordBool));
 		}
 		else
 		{
 			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onOnApplicationPause = (param0) =>
+			obj.onOnApplicationPause = (param0, param1) =>
 			{
 				int top = func.BeginPCall();
 				LuaScriptMgr.Push(L, param0);
-				func.PCall(top, 1);
+				LuaScriptMgr.Push(L, param1);
+				func.PCall(top, 2);
 				func.EndPCall(top);
 			};
 		}
@@ -1266,14 +1202,17 @@ public class LuaBehavioursWrap
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
-			obj.onOnApplicationQuit = (Action)LuaScriptMgr.GetNetObject(L, 3, typeof(Action));
+			obj.onOnApplicationQuit = (LuaBehaviours.LuaMethord)LuaScriptMgr.GetNetObject(L, 3, typeof(LuaBehaviours.LuaMethord));
 		}
 		else
 		{
 			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onOnApplicationQuit = () =>
+			obj.onOnApplicationQuit = (param0) =>
 			{
-				func.Call();
+				int top = func.BeginPCall();
+				LuaScriptMgr.Push(L, param0);
+				func.PCall(top, 1);
+				func.EndPCall(top);
 			};
 		}
 		return 0;
@@ -1303,16 +1242,17 @@ public class LuaBehavioursWrap
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
-			obj.onOnCollisionEnter = (Action<Collision>)LuaScriptMgr.GetNetObject(L, 3, typeof(Action<Collision>));
+			obj.onOnCollisionEnter = (LuaBehaviours.LuaMethordCollision)LuaScriptMgr.GetNetObject(L, 3, typeof(LuaBehaviours.LuaMethordCollision));
 		}
 		else
 		{
 			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onOnCollisionEnter = (param0) =>
+			obj.onOnCollisionEnter = (param0, param1) =>
 			{
 				int top = func.BeginPCall();
-				LuaScriptMgr.PushObject(L, param0);
-				func.PCall(top, 1);
+				LuaScriptMgr.Push(L, param0);
+				LuaScriptMgr.PushObject(L, param1);
+				func.PCall(top, 2);
 				func.EndPCall(top);
 			};
 		}
@@ -1343,16 +1283,17 @@ public class LuaBehavioursWrap
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
-			obj.onOnCollisionEnter2D = (Action<Collision2D>)LuaScriptMgr.GetNetObject(L, 3, typeof(Action<Collision2D>));
+			obj.onOnCollisionEnter2D = (LuaBehaviours.LuaMethordCollision2D)LuaScriptMgr.GetNetObject(L, 3, typeof(LuaBehaviours.LuaMethordCollision2D));
 		}
 		else
 		{
 			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onOnCollisionEnter2D = (param0) =>
+			obj.onOnCollisionEnter2D = (param0, param1) =>
 			{
 				int top = func.BeginPCall();
-				LuaScriptMgr.PushObject(L, param0);
-				func.PCall(top, 1);
+				LuaScriptMgr.Push(L, param0);
+				LuaScriptMgr.PushObject(L, param1);
+				func.PCall(top, 2);
 				func.EndPCall(top);
 			};
 		}
@@ -1383,16 +1324,17 @@ public class LuaBehavioursWrap
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
-			obj.onOnCollisionExit = (Action<Collision>)LuaScriptMgr.GetNetObject(L, 3, typeof(Action<Collision>));
+			obj.onOnCollisionExit = (LuaBehaviours.LuaMethordCollision)LuaScriptMgr.GetNetObject(L, 3, typeof(LuaBehaviours.LuaMethordCollision));
 		}
 		else
 		{
 			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onOnCollisionExit = (param0) =>
+			obj.onOnCollisionExit = (param0, param1) =>
 			{
 				int top = func.BeginPCall();
-				LuaScriptMgr.PushObject(L, param0);
-				func.PCall(top, 1);
+				LuaScriptMgr.Push(L, param0);
+				LuaScriptMgr.PushObject(L, param1);
+				func.PCall(top, 2);
 				func.EndPCall(top);
 			};
 		}
@@ -1423,16 +1365,17 @@ public class LuaBehavioursWrap
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
-			obj.onOnCollisionExit2D = (Action<Collision2D>)LuaScriptMgr.GetNetObject(L, 3, typeof(Action<Collision2D>));
+			obj.onOnCollisionExit2D = (LuaBehaviours.LuaMethordCollision2D)LuaScriptMgr.GetNetObject(L, 3, typeof(LuaBehaviours.LuaMethordCollision2D));
 		}
 		else
 		{
 			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onOnCollisionExit2D = (param0) =>
+			obj.onOnCollisionExit2D = (param0, param1) =>
 			{
 				int top = func.BeginPCall();
-				LuaScriptMgr.PushObject(L, param0);
-				func.PCall(top, 1);
+				LuaScriptMgr.Push(L, param0);
+				LuaScriptMgr.PushObject(L, param1);
+				func.PCall(top, 2);
 				func.EndPCall(top);
 			};
 		}
@@ -1463,16 +1406,17 @@ public class LuaBehavioursWrap
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
-			obj.onOnCollisionStay = (Action<Collision>)LuaScriptMgr.GetNetObject(L, 3, typeof(Action<Collision>));
+			obj.onOnCollisionStay = (LuaBehaviours.LuaMethordCollision)LuaScriptMgr.GetNetObject(L, 3, typeof(LuaBehaviours.LuaMethordCollision));
 		}
 		else
 		{
 			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onOnCollisionStay = (param0) =>
+			obj.onOnCollisionStay = (param0, param1) =>
 			{
 				int top = func.BeginPCall();
-				LuaScriptMgr.PushObject(L, param0);
-				func.PCall(top, 1);
+				LuaScriptMgr.Push(L, param0);
+				LuaScriptMgr.PushObject(L, param1);
+				func.PCall(top, 2);
 				func.EndPCall(top);
 			};
 		}
@@ -1503,16 +1447,17 @@ public class LuaBehavioursWrap
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
-			obj.onOnCollisionStay2D = (Action<Collision2D>)LuaScriptMgr.GetNetObject(L, 3, typeof(Action<Collision2D>));
+			obj.onOnCollisionStay2D = (LuaBehaviours.LuaMethordCollision2D)LuaScriptMgr.GetNetObject(L, 3, typeof(LuaBehaviours.LuaMethordCollision2D));
 		}
 		else
 		{
 			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onOnCollisionStay2D = (param0) =>
+			obj.onOnCollisionStay2D = (param0, param1) =>
 			{
 				int top = func.BeginPCall();
-				LuaScriptMgr.PushObject(L, param0);
-				func.PCall(top, 1);
+				LuaScriptMgr.Push(L, param0);
+				LuaScriptMgr.PushObject(L, param1);
+				func.PCall(top, 2);
 				func.EndPCall(top);
 			};
 		}
@@ -1543,14 +1488,17 @@ public class LuaBehavioursWrap
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
-			obj.onOnDestroy = (Action)LuaScriptMgr.GetNetObject(L, 3, typeof(Action));
+			obj.onOnDestroy = (LuaBehaviours.LuaMethord)LuaScriptMgr.GetNetObject(L, 3, typeof(LuaBehaviours.LuaMethord));
 		}
 		else
 		{
 			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onOnDestroy = () =>
+			obj.onOnDestroy = (param0) =>
 			{
-				func.Call();
+				int top = func.BeginPCall();
+				LuaScriptMgr.Push(L, param0);
+				func.PCall(top, 1);
+				func.EndPCall(top);
 			};
 		}
 		return 0;
@@ -1580,14 +1528,17 @@ public class LuaBehavioursWrap
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
-			obj.onOnDisable = (Action)LuaScriptMgr.GetNetObject(L, 3, typeof(Action));
+			obj.onOnDisable = (LuaBehaviours.LuaMethord)LuaScriptMgr.GetNetObject(L, 3, typeof(LuaBehaviours.LuaMethord));
 		}
 		else
 		{
 			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onOnDisable = () =>
+			obj.onOnDisable = (param0) =>
 			{
-				func.Call();
+				int top = func.BeginPCall();
+				LuaScriptMgr.Push(L, param0);
+				func.PCall(top, 1);
+				func.EndPCall(top);
 			};
 		}
 		return 0;
@@ -1617,14 +1568,17 @@ public class LuaBehavioursWrap
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
-			obj.onOnDrawGizmos = (Action)LuaScriptMgr.GetNetObject(L, 3, typeof(Action));
+			obj.onOnDrawGizmos = (LuaBehaviours.LuaMethord)LuaScriptMgr.GetNetObject(L, 3, typeof(LuaBehaviours.LuaMethord));
 		}
 		else
 		{
 			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onOnDrawGizmos = () =>
+			obj.onOnDrawGizmos = (param0) =>
 			{
-				func.Call();
+				int top = func.BeginPCall();
+				LuaScriptMgr.Push(L, param0);
+				func.PCall(top, 1);
+				func.EndPCall(top);
 			};
 		}
 		return 0;
@@ -1654,14 +1608,17 @@ public class LuaBehavioursWrap
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
-			obj.onOnDrawGizmosSelected = (Action)LuaScriptMgr.GetNetObject(L, 3, typeof(Action));
+			obj.onOnDrawGizmosSelected = (LuaBehaviours.LuaMethord)LuaScriptMgr.GetNetObject(L, 3, typeof(LuaBehaviours.LuaMethord));
 		}
 		else
 		{
 			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onOnDrawGizmosSelected = () =>
+			obj.onOnDrawGizmosSelected = (param0) =>
 			{
-				func.Call();
+				int top = func.BeginPCall();
+				LuaScriptMgr.Push(L, param0);
+				func.PCall(top, 1);
+				func.EndPCall(top);
 			};
 		}
 		return 0;
@@ -1691,14 +1648,17 @@ public class LuaBehavioursWrap
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
-			obj.onOnEnable = (Action)LuaScriptMgr.GetNetObject(L, 3, typeof(Action));
+			obj.onOnEnable = (LuaBehaviours.LuaMethord)LuaScriptMgr.GetNetObject(L, 3, typeof(LuaBehaviours.LuaMethord));
 		}
 		else
 		{
 			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onOnEnable = () =>
+			obj.onOnEnable = (param0) =>
 			{
-				func.Call();
+				int top = func.BeginPCall();
+				LuaScriptMgr.Push(L, param0);
+				func.PCall(top, 1);
+				func.EndPCall(top);
 			};
 		}
 		return 0;
@@ -1728,14 +1688,17 @@ public class LuaBehavioursWrap
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
-			obj.onOnGUI = (Action)LuaScriptMgr.GetNetObject(L, 3, typeof(Action));
+			obj.onOnGUI = (LuaBehaviours.LuaMethord)LuaScriptMgr.GetNetObject(L, 3, typeof(LuaBehaviours.LuaMethord));
 		}
 		else
 		{
 			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onOnGUI = () =>
+			obj.onOnGUI = (param0) =>
 			{
-				func.Call();
+				int top = func.BeginPCall();
+				LuaScriptMgr.Push(L, param0);
+				func.PCall(top, 1);
+				func.EndPCall(top);
 			};
 		}
 		return 0;
@@ -1765,14 +1728,17 @@ public class LuaBehavioursWrap
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
-			obj.onOnLevelWasLoaded = (Action)LuaScriptMgr.GetNetObject(L, 3, typeof(Action));
+			obj.onOnLevelWasLoaded = (LuaBehaviours.LuaMethord)LuaScriptMgr.GetNetObject(L, 3, typeof(LuaBehaviours.LuaMethord));
 		}
 		else
 		{
 			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onOnLevelWasLoaded = () =>
+			obj.onOnLevelWasLoaded = (param0) =>
 			{
-				func.Call();
+				int top = func.BeginPCall();
+				LuaScriptMgr.Push(L, param0);
+				func.PCall(top, 1);
+				func.EndPCall(top);
 			};
 		}
 		return 0;
@@ -1802,14 +1768,17 @@ public class LuaBehavioursWrap
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
-			obj.onOnMouseDown = (Action)LuaScriptMgr.GetNetObject(L, 3, typeof(Action));
+			obj.onOnMouseDown = (LuaBehaviours.LuaMethord)LuaScriptMgr.GetNetObject(L, 3, typeof(LuaBehaviours.LuaMethord));
 		}
 		else
 		{
 			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onOnMouseDown = () =>
+			obj.onOnMouseDown = (param0) =>
 			{
-				func.Call();
+				int top = func.BeginPCall();
+				LuaScriptMgr.Push(L, param0);
+				func.PCall(top, 1);
+				func.EndPCall(top);
 			};
 		}
 		return 0;
@@ -1839,14 +1808,17 @@ public class LuaBehavioursWrap
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
-			obj.onOnMouseDrag = (Action)LuaScriptMgr.GetNetObject(L, 3, typeof(Action));
+			obj.onOnMouseDrag = (LuaBehaviours.LuaMethord)LuaScriptMgr.GetNetObject(L, 3, typeof(LuaBehaviours.LuaMethord));
 		}
 		else
 		{
 			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onOnMouseDrag = () =>
+			obj.onOnMouseDrag = (param0) =>
 			{
-				func.Call();
+				int top = func.BeginPCall();
+				LuaScriptMgr.Push(L, param0);
+				func.PCall(top, 1);
+				func.EndPCall(top);
 			};
 		}
 		return 0;
@@ -1876,14 +1848,17 @@ public class LuaBehavioursWrap
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
-			obj.onOnMouseEnter = (Action)LuaScriptMgr.GetNetObject(L, 3, typeof(Action));
+			obj.onOnMouseEnter = (LuaBehaviours.LuaMethord)LuaScriptMgr.GetNetObject(L, 3, typeof(LuaBehaviours.LuaMethord));
 		}
 		else
 		{
 			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onOnMouseEnter = () =>
+			obj.onOnMouseEnter = (param0) =>
 			{
-				func.Call();
+				int top = func.BeginPCall();
+				LuaScriptMgr.Push(L, param0);
+				func.PCall(top, 1);
+				func.EndPCall(top);
 			};
 		}
 		return 0;
@@ -1913,14 +1888,17 @@ public class LuaBehavioursWrap
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
-			obj.onOnMouseExit = (Action)LuaScriptMgr.GetNetObject(L, 3, typeof(Action));
+			obj.onOnMouseExit = (LuaBehaviours.LuaMethord)LuaScriptMgr.GetNetObject(L, 3, typeof(LuaBehaviours.LuaMethord));
 		}
 		else
 		{
 			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onOnMouseExit = () =>
+			obj.onOnMouseExit = (param0) =>
 			{
-				func.Call();
+				int top = func.BeginPCall();
+				LuaScriptMgr.Push(L, param0);
+				func.PCall(top, 1);
+				func.EndPCall(top);
 			};
 		}
 		return 0;
@@ -1950,14 +1928,17 @@ public class LuaBehavioursWrap
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
-			obj.onOnMouseOver = (Action)LuaScriptMgr.GetNetObject(L, 3, typeof(Action));
+			obj.onOnMouseOver = (LuaBehaviours.LuaMethord)LuaScriptMgr.GetNetObject(L, 3, typeof(LuaBehaviours.LuaMethord));
 		}
 		else
 		{
 			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onOnMouseOver = () =>
+			obj.onOnMouseOver = (param0) =>
 			{
-				func.Call();
+				int top = func.BeginPCall();
+				LuaScriptMgr.Push(L, param0);
+				func.PCall(top, 1);
+				func.EndPCall(top);
 			};
 		}
 		return 0;
@@ -1987,14 +1968,17 @@ public class LuaBehavioursWrap
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
-			obj.onOnMouseUp = (Action)LuaScriptMgr.GetNetObject(L, 3, typeof(Action));
+			obj.onOnMouseUp = (LuaBehaviours.LuaMethord)LuaScriptMgr.GetNetObject(L, 3, typeof(LuaBehaviours.LuaMethord));
 		}
 		else
 		{
 			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onOnMouseUp = () =>
+			obj.onOnMouseUp = (param0) =>
 			{
-				func.Call();
+				int top = func.BeginPCall();
+				LuaScriptMgr.Push(L, param0);
+				func.PCall(top, 1);
+				func.EndPCall(top);
 			};
 		}
 		return 0;
@@ -2024,14 +2008,17 @@ public class LuaBehavioursWrap
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
-			obj.onOnMouseUpAsButton = (Action)LuaScriptMgr.GetNetObject(L, 3, typeof(Action));
+			obj.onOnMouseUpAsButton = (LuaBehaviours.LuaMethord)LuaScriptMgr.GetNetObject(L, 3, typeof(LuaBehaviours.LuaMethord));
 		}
 		else
 		{
 			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onOnMouseUpAsButton = () =>
+			obj.onOnMouseUpAsButton = (param0) =>
 			{
-				func.Call();
+				int top = func.BeginPCall();
+				LuaScriptMgr.Push(L, param0);
+				func.PCall(top, 1);
+				func.EndPCall(top);
 			};
 		}
 		return 0;
@@ -2061,16 +2048,17 @@ public class LuaBehavioursWrap
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
-			obj.onOnParticleCollision = (Action<GameObject>)LuaScriptMgr.GetNetObject(L, 3, typeof(Action<GameObject>));
+			obj.onOnParticleCollision = (LuaBehaviours.LuaMethordGameObject)LuaScriptMgr.GetNetObject(L, 3, typeof(LuaBehaviours.LuaMethordGameObject));
 		}
 		else
 		{
 			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onOnParticleCollision = (param0) =>
+			obj.onOnParticleCollision = (param0, param1) =>
 			{
 				int top = func.BeginPCall();
 				LuaScriptMgr.Push(L, param0);
-				func.PCall(top, 1);
+				LuaScriptMgr.Push(L, param1);
+				func.PCall(top, 2);
 				func.EndPCall(top);
 			};
 		}
@@ -2101,16 +2089,17 @@ public class LuaBehavioursWrap
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
-			obj.onOnTriggerEnter = (Action<Collider>)LuaScriptMgr.GetNetObject(L, 3, typeof(Action<Collider>));
+			obj.onOnTriggerEnter = (LuaBehaviours.LuaMethordCollider)LuaScriptMgr.GetNetObject(L, 3, typeof(LuaBehaviours.LuaMethordCollider));
 		}
 		else
 		{
 			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onOnTriggerEnter = (param0) =>
+			obj.onOnTriggerEnter = (param0, param1) =>
 			{
 				int top = func.BeginPCall();
 				LuaScriptMgr.Push(L, param0);
-				func.PCall(top, 1);
+				LuaScriptMgr.Push(L, param1);
+				func.PCall(top, 2);
 				func.EndPCall(top);
 			};
 		}
@@ -2141,16 +2130,17 @@ public class LuaBehavioursWrap
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
-			obj.onOnTriggerEnter2D = (Action<Collider2D>)LuaScriptMgr.GetNetObject(L, 3, typeof(Action<Collider2D>));
+			obj.onOnTriggerEnter2D = (LuaBehaviours.LuaMethordCollider2D)LuaScriptMgr.GetNetObject(L, 3, typeof(LuaBehaviours.LuaMethordCollider2D));
 		}
 		else
 		{
 			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onOnTriggerEnter2D = (param0) =>
+			obj.onOnTriggerEnter2D = (param0, param1) =>
 			{
 				int top = func.BeginPCall();
 				LuaScriptMgr.Push(L, param0);
-				func.PCall(top, 1);
+				LuaScriptMgr.Push(L, param1);
+				func.PCall(top, 2);
 				func.EndPCall(top);
 			};
 		}
@@ -2181,16 +2171,17 @@ public class LuaBehavioursWrap
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
-			obj.onOnTriggerExit = (Action<Collider>)LuaScriptMgr.GetNetObject(L, 3, typeof(Action<Collider>));
+			obj.onOnTriggerExit = (LuaBehaviours.LuaMethordCollider)LuaScriptMgr.GetNetObject(L, 3, typeof(LuaBehaviours.LuaMethordCollider));
 		}
 		else
 		{
 			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onOnTriggerExit = (param0) =>
+			obj.onOnTriggerExit = (param0, param1) =>
 			{
 				int top = func.BeginPCall();
 				LuaScriptMgr.Push(L, param0);
-				func.PCall(top, 1);
+				LuaScriptMgr.Push(L, param1);
+				func.PCall(top, 2);
 				func.EndPCall(top);
 			};
 		}
@@ -2221,16 +2212,17 @@ public class LuaBehavioursWrap
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
-			obj.onOnTriggerExit2D = (Action<Collider2D>)LuaScriptMgr.GetNetObject(L, 3, typeof(Action<Collider2D>));
+			obj.onOnTriggerExit2D = (LuaBehaviours.LuaMethordCollider2D)LuaScriptMgr.GetNetObject(L, 3, typeof(LuaBehaviours.LuaMethordCollider2D));
 		}
 		else
 		{
 			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onOnTriggerExit2D = (param0) =>
+			obj.onOnTriggerExit2D = (param0, param1) =>
 			{
 				int top = func.BeginPCall();
 				LuaScriptMgr.Push(L, param0);
-				func.PCall(top, 1);
+				LuaScriptMgr.Push(L, param1);
+				func.PCall(top, 2);
 				func.EndPCall(top);
 			};
 		}
@@ -2261,16 +2253,17 @@ public class LuaBehavioursWrap
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
-			obj.onOnTriggerStay = (Action<Collider>)LuaScriptMgr.GetNetObject(L, 3, typeof(Action<Collider>));
+			obj.onOnTriggerStay = (LuaBehaviours.LuaMethordCollider)LuaScriptMgr.GetNetObject(L, 3, typeof(LuaBehaviours.LuaMethordCollider));
 		}
 		else
 		{
 			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onOnTriggerStay = (param0) =>
+			obj.onOnTriggerStay = (param0, param1) =>
 			{
 				int top = func.BeginPCall();
 				LuaScriptMgr.Push(L, param0);
-				func.PCall(top, 1);
+				LuaScriptMgr.Push(L, param1);
+				func.PCall(top, 2);
 				func.EndPCall(top);
 			};
 		}
@@ -2301,130 +2294,17 @@ public class LuaBehavioursWrap
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
-			obj.onOnTriggerStay2D = (Action<Collider2D>)LuaScriptMgr.GetNetObject(L, 3, typeof(Action<Collider2D>));
+			obj.onOnTriggerStay2D = (LuaBehaviours.LuaMethordCollider2D)LuaScriptMgr.GetNetObject(L, 3, typeof(LuaBehaviours.LuaMethordCollider2D));
 		}
 		else
 		{
 			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onOnTriggerStay2D = (param0) =>
+			obj.onOnTriggerStay2D = (param0, param1) =>
 			{
 				int top = func.BeginPCall();
 				LuaScriptMgr.Push(L, param0);
-				func.PCall(top, 1);
-				func.EndPCall(top);
-			};
-		}
-		return 0;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_onReset(IntPtr L)
-	{
-		object o = LuaScriptMgr.GetLuaObject(L, 1);
-		LuaBehaviours obj = (LuaBehaviours)o;
-
-		if (obj == null)
-		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
-
-			if (types == LuaTypes.LUA_TTABLE)
-			{
-				LuaDLL.luaL_error(L, "unknown member name onReset");
-			}
-			else
-			{
-				LuaDLL.luaL_error(L, "attempt to index onReset on a nil value");
-			}
-		}
-
-		LuaTypes funcType = LuaDLL.lua_type(L, 3);
-
-		if (funcType != LuaTypes.LUA_TFUNCTION)
-		{
-			obj.onReset = (Action)LuaScriptMgr.GetNetObject(L, 3, typeof(Action));
-		}
-		else
-		{
-			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onReset = () =>
-			{
-				func.Call();
-			};
-		}
-		return 0;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_onOnAnimatorMove(IntPtr L)
-	{
-		object o = LuaScriptMgr.GetLuaObject(L, 1);
-		LuaBehaviours obj = (LuaBehaviours)o;
-
-		if (obj == null)
-		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
-
-			if (types == LuaTypes.LUA_TTABLE)
-			{
-				LuaDLL.luaL_error(L, "unknown member name onOnAnimatorMove");
-			}
-			else
-			{
-				LuaDLL.luaL_error(L, "attempt to index onOnAnimatorMove on a nil value");
-			}
-		}
-
-		LuaTypes funcType = LuaDLL.lua_type(L, 3);
-
-		if (funcType != LuaTypes.LUA_TFUNCTION)
-		{
-			obj.onOnAnimatorMove = (Action)LuaScriptMgr.GetNetObject(L, 3, typeof(Action));
-		}
-		else
-		{
-			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onOnAnimatorMove = () =>
-			{
-				func.Call();
-			};
-		}
-		return 0;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_onOnAnimatorIK(IntPtr L)
-	{
-		object o = LuaScriptMgr.GetLuaObject(L, 1);
-		LuaBehaviours obj = (LuaBehaviours)o;
-
-		if (obj == null)
-		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
-
-			if (types == LuaTypes.LUA_TTABLE)
-			{
-				LuaDLL.luaL_error(L, "unknown member name onOnAnimatorIK");
-			}
-			else
-			{
-				LuaDLL.luaL_error(L, "attempt to index onOnAnimatorIK on a nil value");
-			}
-		}
-
-		LuaTypes funcType = LuaDLL.lua_type(L, 3);
-
-		if (funcType != LuaTypes.LUA_TFUNCTION)
-		{
-			obj.onOnAnimatorIK = (Action<int>)LuaScriptMgr.GetNetObject(L, 3, typeof(Action<int>));
-		}
-		else
-		{
-			LuaFunction func = LuaScriptMgr.ToLuaFunction(L, 3);
-			obj.onOnAnimatorIK = (param0) =>
-			{
-				int top = func.BeginPCall();
-				LuaScriptMgr.Push(L, param0);
-				func.PCall(top, 1);
+				LuaScriptMgr.Push(L, param1);
+				func.PCall(top, 2);
 				func.EndPCall(top);
 			};
 		}

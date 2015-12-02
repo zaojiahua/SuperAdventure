@@ -10,297 +10,286 @@ public class LuaBehaviours : MonoBehaviour
 	public delegate void LuaMethord(LuaTable t);
 
 	public LuaMethord onStart;
+
 	void Start ()
 	{
 		if (onStart != null)
 			onStart (luaModule);
 	}
 
-	public Action onUpdate;
+	public LuaMethord onUpdate;
 
 	void Update ()
 	{
 		if (onUpdate != null)
-			onUpdate ();
+			onUpdate (luaModule);
 	}
 
-	public Action onLateUpdate;
+	public LuaMethord onLateUpdate;
 
 	void LateUpdate ()
 	{
 		if (onLateUpdate != null)
-			onLateUpdate ();
+			onLateUpdate (luaModule);
 	}
 
-	public Action onFixedUpdate;
+	public LuaMethord onFixedUpdate;
 
 	void FixedUpdate ()
 	{
 		if (onFixedUpdate != null)
-			onFixedUpdate ();
+			onFixedUpdate (luaModule);
 	}
 
-	public Action<bool> onOnApplicationFocus;
+	public delegate void LuaMethordBool(LuaTable t,bool b);
+
+	public LuaMethordBool onOnApplicationFocus;
 
 	void OnApplicationFocus (bool focusStatus)
 	{
 		if (onOnApplicationFocus != null)
-			onOnApplicationFocus (focusStatus);
+			onOnApplicationFocus (luaModule,focusStatus);
 	}
 
-	public Action<bool> onOnApplicationPause;
+	public LuaMethordBool onOnApplicationPause;
 
 	void OnApplicationPause (bool pauseStatus)
 	{
 		if (onOnApplicationPause != null)
-			onOnApplicationPause (pauseStatus);
+			onOnApplicationPause (luaModule,pauseStatus);
 	}
 
-	public Action onOnApplicationQuit;
+	public LuaMethord onOnApplicationQuit;
 
 	void OnApplicationQuit ()
 	{
 		if (onOnApplicationQuit != null)
-			onOnApplicationQuit ();
+			onOnApplicationQuit (luaModule);
 	}
 
-	public Action<Collision> onOnCollisionEnter;
+	public delegate void LuaMethordCollision(LuaTable t,Collision b);
+
+	public LuaMethordCollision onOnCollisionEnter;
 
 	void OnCollisionEnter (Collision collision)
 	{
 		if (onOnCollisionEnter != null)
-			onOnCollisionEnter (collision);
+			onOnCollisionEnter (luaModule, collision);
 	}
 
-	public Action<Collision2D> onOnCollisionEnter2D;
+	public delegate void LuaMethordCollision2D(LuaTable t,Collision2D b);
+
+	public LuaMethordCollision2D onOnCollisionEnter2D;
 
 	void OnCollisionEnter2D (Collision2D coll)
 	{
 		if (onOnCollisionEnter2D != null)
-			onOnCollisionEnter2D (coll);
+			onOnCollisionEnter2D (luaModule, coll);
 	}
 
-	public Action<Collision> onOnCollisionExit;
+	public LuaMethordCollision onOnCollisionExit;
 
 	void OnCollisionExit (Collision collision)
 	{
 		if (onOnCollisionExit != null)
-			onOnCollisionExit (collision);
+			onOnCollisionExit (luaModule, collision);
 	}
 
-	public Action<Collision2D> onOnCollisionExit2D;
+	public LuaMethordCollision2D onOnCollisionExit2D;
 
 	void OnCollisionExit2D (Collision2D coll)
 	{
 		if (onOnCollisionExit2D != null)
-			onOnCollisionExit2D (coll);
+			onOnCollisionExit2D (luaModule, coll);
 	}
 
-	public Action<Collision> onOnCollisionStay;
+	public LuaMethordCollision onOnCollisionStay;
 
 	void OnCollisionStay (Collision collisionInfo)
 	{
 		if (onOnCollisionStay != null)
-			onOnCollisionStay (collisionInfo);
+			onOnCollisionStay (luaModule, collisionInfo);
 	}
 
-	public Action<Collision2D> onOnCollisionStay2D;
+	public LuaMethordCollision2D onOnCollisionStay2D;
 
 	void OnCollisionStay2D (Collision2D coll)
 	{
 		if (onOnCollisionStay2D != null)
-			onOnCollisionStay2D (coll);
+			onOnCollisionStay2D (luaModule, coll);
 	}
 
-	public Action onOnDestroy;
+	public LuaMethord onOnDestroy;
 
 	void OnDestroy ()
 	{
 		if (onOnDestroy != null)
-			onOnDestroy ();
+			onOnDestroy (luaModule);
 	}
 
-	public Action onOnDisable;
+	public LuaMethord onOnDisable;
 
 	void OnDisable ()
 	{
 		if (onOnDisable != null)
-			onOnDisable ();
+			onOnDisable (luaModule);
 	}
 
-	public Action onOnDrawGizmos;
+	public LuaMethord onOnDrawGizmos;
 
 	void OnDrawGizmos ()
 	{
 		if (onOnDrawGizmos != null)
-			onOnDrawGizmos ();
+			onOnDrawGizmos (luaModule);
 	}
 
-	public Action onOnDrawGizmosSelected;
+	public LuaMethord onOnDrawGizmosSelected;
 
 	void OnDrawGizmosSelected ()
 	{
 		if (onOnDrawGizmosSelected != null)
-			onOnDrawGizmosSelected ();
+			onOnDrawGizmosSelected (luaModule);
 	}
 
-	public Action onOnEnable;
+	public LuaMethord onOnEnable;
 
 	void OnEnable ()
 	{
 		if (onOnEnable != null)
-			onOnEnable ();
+			onOnEnable (luaModule);
 	}
 
-	public Action onOnGUI;
+	public LuaMethord onOnGUI;
 
 	void OnGUI ()
 	{
 		if (onOnGUI != null)
-			onOnGUI ();
+			onOnGUI (luaModule);
 	}
 
-	public Action onOnLevelWasLoaded;
+	public LuaMethord onOnLevelWasLoaded;
 
 	void OnLevelWasLoaded ()
 	{
 		if (onOnLevelWasLoaded != null)
-			onOnLevelWasLoaded ();
+			onOnLevelWasLoaded (luaModule);
 	}
 
-	public Action onOnMouseDown;
+	public LuaMethord onOnMouseDown;
 
 	void OnMouseDown ()
 	{
 		if (onOnMouseDown != null)
-			onOnMouseDown ();
+			onOnMouseDown (luaModule);
 	}
 
-	public Action onOnMouseDrag;
+	public LuaMethord onOnMouseDrag;
 
 	void OnMouseDrag ()
 	{
 		if (onOnMouseDrag != null)
-			onOnMouseDrag ();
+			onOnMouseDrag (luaModule);
 	}
 
-	public Action onOnMouseEnter;
+	public LuaMethord onOnMouseEnter;
 
 	void OnMouseEnter ()
 	{
 		if (onOnMouseEnter != null)
-			onOnMouseEnter ();
+			onOnMouseEnter (luaModule);
 	}
 
-	public Action onOnMouseExit;
+	public LuaMethord onOnMouseExit;
 
 	void OnMouseExit ()
 	{
 		if (onOnMouseExit != null)
-			onOnMouseExit ();
+			onOnMouseExit (luaModule);
 	}
 
-	public Action onOnMouseOver;
+	public LuaMethord onOnMouseOver;
 
 	void OnMouseOver ()
 	{
 		if (onOnMouseOver != null)
-			onOnMouseOver ();
+			onOnMouseOver (luaModule);
 	}
 
-	public Action onOnMouseUp;
+	public LuaMethord onOnMouseUp;
 
 	void OnMouseUp ()
 	{
 		if (onOnMouseUp != null)
-			onOnMouseUp ();
+			onOnMouseUp (luaModule);
 	}
 
-	public Action onOnMouseUpAsButton;
+	public LuaMethord onOnMouseUpAsButton;
 
 	void OnMouseUpAsButton ()
 	{
 		if (onOnMouseUpAsButton != null)
-			onOnMouseUpAsButton ();
+			onOnMouseUpAsButton (luaModule);
 	}
 
-	public Action<GameObject> onOnParticleCollision;
+	public delegate void LuaMethordGameObject(LuaTable t,GameObject b);
+
+	public LuaMethordGameObject onOnParticleCollision;
 
 	void OnParticleCollision (GameObject other)
 	{
 		if (onOnParticleCollision != null)
-			onOnParticleCollision (other);
+			onOnParticleCollision (luaModule, other);
 	}
 
-	public Action<Collider> onOnTriggerEnter;
+	public delegate void LuaMethordCollider(LuaTable T, Collider c);
+
+	public LuaMethordCollider onOnTriggerEnter;
 
 	void OnTriggerEnter (Collider other)
 	{
 		if (onOnTriggerEnter != null)
-			onOnTriggerEnter (other);
+			onOnTriggerEnter (luaModule, other);
 	}
 
-	public Action<Collider2D> onOnTriggerEnter2D;
+	public delegate void LuaMethordCollider2D(LuaTable T, Collider2D c);
+
+	public LuaMethordCollider2D onOnTriggerEnter2D;
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
 		if (onOnTriggerEnter2D != null)
-			onOnTriggerEnter2D (other);
+			onOnTriggerEnter2D (luaModule, other);
 	}
 
-	public Action<Collider> onOnTriggerExit;
+	public LuaMethordCollider onOnTriggerExit;
 
 	void OnTriggerExit (Collider other)
 	{
 		if (onOnTriggerExit != null)
-			onOnTriggerExit (other);
+			onOnTriggerExit (luaModule, other);
 	}
 
-	public Action<Collider2D> onOnTriggerExit2D;
+	public LuaMethordCollider2D onOnTriggerExit2D;
 
 	void OnTriggerExit2D (Collider2D other)
 	{
 		if (onOnTriggerExit2D != null)
-			onOnTriggerExit2D (other);
+			onOnTriggerExit2D (luaModule,other);
 	}
 
-	public Action<Collider> onOnTriggerStay;
+	public LuaMethordCollider onOnTriggerStay;
 
 	void OnTriggerStay (Collider other)
 	{
 		if (onOnTriggerStay != null)
-			onOnTriggerStay (other);
+			onOnTriggerStay (luaModule, other);
 	}
 
-	public Action<Collider2D> onOnTriggerStay2D;
+	public LuaMethordCollider2D onOnTriggerStay2D;
 
 	void OnTriggerStay2D (Collider2D other)
 	{
 		if (onOnTriggerStay2D != null)
-			onOnTriggerStay2D (other);
-	}
-
-	public Action onReset;
-
-	void Reset ()
-	{
-		if (onReset != null)
-			onReset ();
-	}
-
-	public Action onOnAnimatorMove;
-
-	void OnAnimatorMove ()
-	{
-		if (onOnAnimatorMove != null)
-			onOnAnimatorMove ();
-	}
-
-	public Action<int> onOnAnimatorIK;
-
-	void OnAnimatorIK (int layerIndex)
-	{
-		if (onOnAnimatorIK != null)
-			onOnAnimatorIK (layerIndex);
+			onOnTriggerStay2D (luaModule,other);
 	}
 }

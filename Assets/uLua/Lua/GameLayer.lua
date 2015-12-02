@@ -11,6 +11,7 @@ function GameLayer:start()
 	print(self.gameObject.name);
 end
 
-
-
+function GameLayer:update()
+	print(self.gameObject.name);
+end
 

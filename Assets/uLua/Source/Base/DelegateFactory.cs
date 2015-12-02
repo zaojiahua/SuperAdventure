@@ -18,12 +18,12 @@ public static class DelegateFactory
 		dict.Add(typeof(System.Reflection.TypeFilter), new DelegateValue(System_Reflection_TypeFilter));
 		dict.Add(typeof(TestLuaDelegate.VoidDelegate), new DelegateValue(TestLuaDelegate_VoidDelegate));
 		dict.Add(typeof(LuaBehaviours.LuaMethord), new DelegateValue(LuaBehaviours_LuaMethord));
-		dict.Add(typeof(Action<bool>), new DelegateValue(Action_bool));
-		dict.Add(typeof(Action<Collision>), new DelegateValue(Action_Collision));
-		dict.Add(typeof(Action<Collision2D>), new DelegateValue(Action_Collision2D));
-		dict.Add(typeof(Action<Collider>), new DelegateValue(Action_Collider));
-		dict.Add(typeof(Action<Collider2D>), new DelegateValue(Action_Collider2D));
-		dict.Add(typeof(Action<int>), new DelegateValue(Action_int));
+		dict.Add(typeof(LuaBehaviours.LuaMethordBool), new DelegateValue(LuaBehaviours_LuaMethordBool));
+		dict.Add(typeof(LuaBehaviours.LuaMethordCollision), new DelegateValue(LuaBehaviours_LuaMethordCollision));
+		dict.Add(typeof(LuaBehaviours.LuaMethordCollision2D), new DelegateValue(LuaBehaviours_LuaMethordCollision2D));
+		dict.Add(typeof(LuaBehaviours.LuaMethordGameObject), new DelegateValue(LuaBehaviours_LuaMethordGameObject));
+		dict.Add(typeof(LuaBehaviours.LuaMethordCollider), new DelegateValue(LuaBehaviours_LuaMethordCollider));
+		dict.Add(typeof(LuaBehaviours.LuaMethordCollider2D), new DelegateValue(LuaBehaviours_LuaMethordCollider2D));
 		dict.Add(typeof(Camera.CameraCallback), new DelegateValue(Camera_CameraCallback));
 		dict.Add(typeof(AudioClip.PCMReaderCallback), new DelegateValue(AudioClip_PCMReaderCallback));
 		dict.Add(typeof(AudioClip.PCMSetPositionCallback), new DelegateValue(AudioClip_PCMSetPositionCallback));
@@ -132,79 +132,85 @@ public static class DelegateFactory
 		return d;
 	}
 
-	public static Delegate Action_bool(LuaFunction func)
+	public static Delegate LuaBehaviours_LuaMethordBool(LuaFunction func)
 	{
-		Action<bool> d = (param0) =>
+		LuaBehaviours.LuaMethordBool d = (param0, param1) =>
 		{
 			int top = func.BeginPCall();
 			IntPtr L = func.GetLuaState();
 			LuaScriptMgr.Push(L, param0);
-			func.PCall(top, 1);
+			LuaScriptMgr.Push(L, param1);
+			func.PCall(top, 2);
 			func.EndPCall(top);
 		};
 		return d;
 	}
 
-	public static Delegate Action_Collision(LuaFunction func)
+	public static Delegate LuaBehaviours_LuaMethordCollision(LuaFunction func)
 	{
-		Action<Collision> d = (param0) =>
-		{
-			int top = func.BeginPCall();
-			IntPtr L = func.GetLuaState();
-			LuaScriptMgr.PushObject(L, param0);
-			func.PCall(top, 1);
-			func.EndPCall(top);
-		};
-		return d;
-	}
-
-	public static Delegate Action_Collision2D(LuaFunction func)
-	{
-		Action<Collision2D> d = (param0) =>
-		{
-			int top = func.BeginPCall();
-			IntPtr L = func.GetLuaState();
-			LuaScriptMgr.PushObject(L, param0);
-			func.PCall(top, 1);
-			func.EndPCall(top);
-		};
-		return d;
-	}
-
-	public static Delegate Action_Collider(LuaFunction func)
-	{
-		Action<Collider> d = (param0) =>
+		LuaBehaviours.LuaMethordCollision d = (param0, param1) =>
 		{
 			int top = func.BeginPCall();
 			IntPtr L = func.GetLuaState();
 			LuaScriptMgr.Push(L, param0);
-			func.PCall(top, 1);
+			LuaScriptMgr.PushObject(L, param1);
+			func.PCall(top, 2);
 			func.EndPCall(top);
 		};
 		return d;
 	}
 
-	public static Delegate Action_Collider2D(LuaFunction func)
+	public static Delegate LuaBehaviours_LuaMethordCollision2D(LuaFunction func)
 	{
-		Action<Collider2D> d = (param0) =>
+		LuaBehaviours.LuaMethordCollision2D d = (param0, param1) =>
 		{
 			int top = func.BeginPCall();
 			IntPtr L = func.GetLuaState();
 			LuaScriptMgr.Push(L, param0);
-			func.PCall(top, 1);
+			LuaScriptMgr.PushObject(L, param1);
+			func.PCall(top, 2);
 			func.EndPCall(top);
 		};
 		return d;
 	}
 
-	public static Delegate Action_int(LuaFunction func)
+	public static Delegate LuaBehaviours_LuaMethordGameObject(LuaFunction func)
 	{
-		Action<int> d = (param0) =>
+		LuaBehaviours.LuaMethordGameObject d = (param0, param1) =>
 		{
 			int top = func.BeginPCall();
 			IntPtr L = func.GetLuaState();
 			LuaScriptMgr.Push(L, param0);
-			func.PCall(top, 1);
+			LuaScriptMgr.Push(L, param1);
+			func.PCall(top, 2);
+			func.EndPCall(top);
+		};
+		return d;
+	}
+
+	public static Delegate LuaBehaviours_LuaMethordCollider(LuaFunction func)
+	{
+		LuaBehaviours.LuaMethordCollider d = (param0, param1) =>
+		{
+			int top = func.BeginPCall();
+			IntPtr L = func.GetLuaState();
+			LuaScriptMgr.Push(L, param0);
+			LuaScriptMgr.Push(L, param1);
+			func.PCall(top, 2);
+			func.EndPCall(top);
+		};
+		return d;
+	}
+
+	public static Delegate LuaBehaviours_LuaMethordCollider2D(LuaFunction func)
+	{
+		LuaBehaviours.LuaMethordCollider2D d = (param0, param1) =>
+		{
+			int top = func.BeginPCall();
+			IntPtr L = func.GetLuaState();
+			LuaScriptMgr.Push(L, param0);
+			LuaScriptMgr.Push(L, param1);
+			func.PCall(top, 2);
 			func.EndPCall(top);
 		};
 		return d;

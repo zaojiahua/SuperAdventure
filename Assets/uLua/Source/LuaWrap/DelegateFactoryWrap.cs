@@ -13,12 +13,13 @@ public class DelegateFactoryWrap
 			new LuaMethod("System_Reflection_MemberFilter", System_Reflection_MemberFilter),
 			new LuaMethod("System_Reflection_TypeFilter", System_Reflection_TypeFilter),
 			new LuaMethod("TestLuaDelegate_VoidDelegate", TestLuaDelegate_VoidDelegate),
-			new LuaMethod("Action_bool", Action_bool),
-			new LuaMethod("Action_Collision", Action_Collision),
-			new LuaMethod("Action_Collision2D", Action_Collision2D),
-			new LuaMethod("Action_Collider", Action_Collider),
-			new LuaMethod("Action_Collider2D", Action_Collider2D),
-			new LuaMethod("Action_int", Action_int),
+			new LuaMethod("LuaBehaviours_LuaMethord", LuaBehaviours_LuaMethord),
+			new LuaMethod("LuaBehaviours_LuaMethordBool", LuaBehaviours_LuaMethordBool),
+			new LuaMethod("LuaBehaviours_LuaMethordCollision", LuaBehaviours_LuaMethordCollision),
+			new LuaMethod("LuaBehaviours_LuaMethordCollision2D", LuaBehaviours_LuaMethordCollision2D),
+			new LuaMethod("LuaBehaviours_LuaMethordGameObject", LuaBehaviours_LuaMethordGameObject),
+			new LuaMethod("LuaBehaviours_LuaMethordCollider", LuaBehaviours_LuaMethordCollider),
+			new LuaMethod("LuaBehaviours_LuaMethordCollider2D", LuaBehaviours_LuaMethordCollider2D),
 			new LuaMethod("Camera_CameraCallback", Camera_CameraCallback),
 			new LuaMethod("AudioClip_PCMReaderCallback", AudioClip_PCMReaderCallback),
 			new LuaMethod("AudioClip_PCMSetPositionCallback", AudioClip_PCMSetPositionCallback),
@@ -108,61 +109,71 @@ public class DelegateFactoryWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Action_bool(IntPtr L)
+	static int LuaBehaviours_LuaMethord(IntPtr L)
 	{
 		LuaScriptMgr.CheckArgsCount(L, 1);
 		LuaFunction arg0 = LuaScriptMgr.GetLuaFunction(L, 1);
-		Delegate o = DelegateFactory.Action_bool(arg0);
+		Delegate o = DelegateFactory.LuaBehaviours_LuaMethord(arg0);
 		LuaScriptMgr.Push(L, o);
 		return 1;
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Action_Collision(IntPtr L)
+	static int LuaBehaviours_LuaMethordBool(IntPtr L)
 	{
 		LuaScriptMgr.CheckArgsCount(L, 1);
 		LuaFunction arg0 = LuaScriptMgr.GetLuaFunction(L, 1);
-		Delegate o = DelegateFactory.Action_Collision(arg0);
+		Delegate o = DelegateFactory.LuaBehaviours_LuaMethordBool(arg0);
 		LuaScriptMgr.Push(L, o);
 		return 1;
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Action_Collision2D(IntPtr L)
+	static int LuaBehaviours_LuaMethordCollision(IntPtr L)
 	{
 		LuaScriptMgr.CheckArgsCount(L, 1);
 		LuaFunction arg0 = LuaScriptMgr.GetLuaFunction(L, 1);
-		Delegate o = DelegateFactory.Action_Collision2D(arg0);
+		Delegate o = DelegateFactory.LuaBehaviours_LuaMethordCollision(arg0);
 		LuaScriptMgr.Push(L, o);
 		return 1;
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Action_Collider(IntPtr L)
+	static int LuaBehaviours_LuaMethordCollision2D(IntPtr L)
 	{
 		LuaScriptMgr.CheckArgsCount(L, 1);
 		LuaFunction arg0 = LuaScriptMgr.GetLuaFunction(L, 1);
-		Delegate o = DelegateFactory.Action_Collider(arg0);
+		Delegate o = DelegateFactory.LuaBehaviours_LuaMethordCollision2D(arg0);
 		LuaScriptMgr.Push(L, o);
 		return 1;
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Action_Collider2D(IntPtr L)
+	static int LuaBehaviours_LuaMethordGameObject(IntPtr L)
 	{
 		LuaScriptMgr.CheckArgsCount(L, 1);
 		LuaFunction arg0 = LuaScriptMgr.GetLuaFunction(L, 1);
-		Delegate o = DelegateFactory.Action_Collider2D(arg0);
+		Delegate o = DelegateFactory.LuaBehaviours_LuaMethordGameObject(arg0);
 		LuaScriptMgr.Push(L, o);
 		return 1;
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Action_int(IntPtr L)
+	static int LuaBehaviours_LuaMethordCollider(IntPtr L)
 	{
 		LuaScriptMgr.CheckArgsCount(L, 1);
 		LuaFunction arg0 = LuaScriptMgr.GetLuaFunction(L, 1);
-		Delegate o = DelegateFactory.Action_int(arg0);
+		Delegate o = DelegateFactory.LuaBehaviours_LuaMethordCollider(arg0);
+		LuaScriptMgr.Push(L, o);
+		return 1;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int LuaBehaviours_LuaMethordCollider2D(IntPtr L)
+	{
+		LuaScriptMgr.CheckArgsCount(L, 1);
+		LuaFunction arg0 = LuaScriptMgr.GetLuaFunction(L, 1);
+		Delegate o = DelegateFactory.LuaBehaviours_LuaMethordCollider2D(arg0);
 		LuaScriptMgr.Push(L, o);
 		return 1;
 	}
