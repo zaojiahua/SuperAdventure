@@ -1,20 +1,16 @@
-require "System.class";
 require "LuaBehaviour";
 
+--子类
 GameLayer = class("GameLayer",LuaBehaviour);
 
-function GameLayer:ctor(...)
-  LuaBehaviour:ctor(...);
-  --setmetatable(self,{__index = LuaBehaviour});
+function GameLayer:awake()
+
 end
 
-function GameLayer.onAwake()
-  print("awake...");
+function GameLayer:start()
+	print(self.gameObject.name);
 end
 
-GameObject = UnityEngine.GameObject
-local level = GameObject("Level01")
-local gameLayer = GameLayer.New();
-level.gameObject:AddComponent(gameLayer.GetClassType());
+
 
 

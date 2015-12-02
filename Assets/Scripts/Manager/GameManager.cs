@@ -30,6 +30,6 @@ public class GameManager : MonoBehaviour
 
 	void Start ()
 	{
-		uluaMgr.DoFile("GameLayer.lua");
+		uluaMgr.DoFile("LuaManager.lua");
 	}
 }

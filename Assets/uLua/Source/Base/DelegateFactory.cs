@@ -17,6 +17,7 @@ public static class DelegateFactory
 		dict.Add(typeof(System.Reflection.MemberFilter), new DelegateValue(System_Reflection_MemberFilter));
 		dict.Add(typeof(System.Reflection.TypeFilter), new DelegateValue(System_Reflection_TypeFilter));
 		dict.Add(typeof(TestLuaDelegate.VoidDelegate), new DelegateValue(TestLuaDelegate_VoidDelegate));
+		dict.Add(typeof(LuaBehaviours.LuaMethord), new DelegateValue(LuaBehaviours_LuaMethord));
 		dict.Add(typeof(Action<bool>), new DelegateValue(Action_bool));
 		dict.Add(typeof(Action<Collision>), new DelegateValue(Action_Collision));
 		dict.Add(typeof(Action<Collision2D>), new DelegateValue(Action_Collision2D));
@@ -108,6 +109,19 @@ public static class DelegateFactory
 	public static Delegate TestLuaDelegate_VoidDelegate(LuaFunction func)
 	{
 		TestLuaDelegate.VoidDelegate d = (param0) =>
+		{
+			int top = func.BeginPCall();
+			IntPtr L = func.GetLuaState();
+			LuaScriptMgr.Push(L, param0);
+			func.PCall(top, 1);
+			func.EndPCall(top);
+		};
+		return d;
+	}
+
+	public static Delegate LuaBehaviours_LuaMethord(LuaFunction func)
+	{
+		LuaBehaviours.LuaMethord d = (param0) =>
 		{
 			int top = func.BeginPCall();
 			IntPtr L = func.GetLuaState();

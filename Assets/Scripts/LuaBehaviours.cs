@@ -5,15 +5,11 @@ using LuaInterface;
 
 public class LuaBehaviours : MonoBehaviour
 {
-	public LuaTable luaModule
-	{
-		private get;
-		set;
-	}
+	public LuaTable luaModule;
 
 	public delegate void LuaMethord(LuaTable t);
 
-	LuaMethord onStart;
+	public LuaMethord onStart;
 	void Start ()
 	{
 		if (onStart != null)
